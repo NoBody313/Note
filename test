@@ -1,0 +1,14 @@
+private function parseDate($date)
+    {
+        // Cek apakah tanggal berupa angka serial Excel
+        if (is_numeric($date)) {
+            return Date::excelToDateTimeObject($date)->format('Y-m-d'); // Format default Y-m-d
+        }
+
+        // Jika tanggal dalam format dd/mm/yyyy
+        try {
+            return Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
